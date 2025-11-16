@@ -1,0 +1,82 @@
+-- 安全性检测
+local General_Func = require("utils.func")
+local nvim_tree_status, nvim_tree = pcall(require, "nvim-tree")
+if not nvim_tree_status then
+    vim.notify("没有找到 nvim-tree")
+    return
+end
+
+keybindings = require("keybindings")
+
+local on_attach
+
+if General_Func.is_safe_cb(keybindings.mapTree, "1") then
+    on_attach = keybindings.mapTree
+end
+
+if not on_attach then
+    local file_name = General_Func.get_file_name()
+    vim.notify(
+        string.format("在文件 %s 中没有找到CallBack函数. binding-info: 1", file_name),
+        vim.log.levels.WARN
+    )
+    return 
+end
+
+nvim_tree.setup({
+    -- 不显示 git 状态图标
+    git = {
+        enable = false,
+    },
+    -- project plugin 需要这样设置
+    update_cwd = true,
+    update_focused_file = {
+        enable = true,
+        update_cwd = true,
+    },
+    -- 隐藏 .文件 和 node_modules 文件夹
+    filters = {
+        dotfiles = true,
+        custom = { 'node_modules' },
+    },
+    view = {
+        -- 宽度
+        width = 30,
+        -- 也可以 'right'
+        side = 'left',
+        -- 隐藏根目录
+--        hide_root_folder = false,
+        -- 自定义列表中快捷键
+--        mappings = {
+--            custom_only = false,
+--            list = list_keys,
+--        },
+        -- 显示行数
+        number = true,
+        relativenumber = true,
+        -- 显示图标
+        signcolumn = 'yes',
+    },
+    actions = {
+        open_file = {
+            -- 首次打开大小适配
+            resize_window = false,
+            -- 打开文件时关闭
+            quit_on_open = false,
+        },
+    },
+    renderer = {
+        root_folder_label = false,
+    },
+    -- wsl install -g wsl-open
+    -- https://github.com/4U6U57/wsl-open/
+--    system_open = {
+--       cmd = 'wsl-open', -- mac 直接设置为 open
+--    },
+    on_attach = on_attach
+})
+
+-- 自动关闭
+vim.cmd([[
+    autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+]])
