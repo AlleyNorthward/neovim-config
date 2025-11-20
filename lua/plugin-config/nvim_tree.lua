@@ -1,27 +1,12 @@
--- 安全性检测
-local General_Func = require("utils.func")
 local nvim_tree_status, nvim_tree = pcall(require, "nvim-tree")
 if not nvim_tree_status then
     vim.notify("没有找到 nvim-tree")
     return
 end
 
-keybindings = require("keybindings")
+keybindings = require("keymap-config.keymap_interface").plugin_keys
 
-local on_attach
-
-if General_Func.is_safe_cb(keybindings.mapTree, "1") then
-    on_attach = keybindings.mapTree
-end
-
-if not on_attach then
-    local file_name = General_Func.get_file_name()
-    vim.notify(
-        string.format("在文件 %s 中没有找到CallBack函数. binding-info: 1", file_name),
-        vim.log.levels.WARN
-    )
-    return 
-end
+local on_attach = keybindings.mapTree
 
 nvim_tree.setup({
     -- 不显示 git 状态图标

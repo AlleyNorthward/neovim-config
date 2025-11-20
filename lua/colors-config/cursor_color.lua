@@ -1,5 +1,4 @@
--- 这部分呢, 尝试自己去写.要不然一直看别人的, 只是单纯地去抄, 没有一点真材实料.
-
+local state_debug = require("debug.debug_manager")
 -- (1) yanking时高亮显示
 -- 自定义颜色组
 vim.api.nvim_set_hl(

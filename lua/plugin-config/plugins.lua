@@ -18,8 +18,8 @@ packer.startup(
         use({ "akinsho/bufferline.nvim", requires = { "kyazdani42/nvim-web-devicons", "moll/vim-bbye" }})
 
         -- lualine
-        use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
-        use("arkav/lualine-lsp-progress")
+--         use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
+--         use("arkav/lualine-lsp-progress")
 
         -- treesitter 代码高亮
         use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -28,12 +28,12 @@ packer.startup(
 
 -- 每次保存 plugins.lua 自动安装插件
 
-pcall(
-  vim.cmd,
-  [[
-    augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-    augroup end
-  ]]
-)
+--pcall(
+--  vim.cmd,
+--  [[
+--    augroup packer_user_config
+--    autocmd!
+--     autocmd BufWritePost plugins.lua source <afile> | PackerSync
+--     augroup end
+--   ]]
+-- )
