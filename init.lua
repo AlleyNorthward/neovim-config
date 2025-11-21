@@ -1,7 +1,5 @@
 require("init")
-require("plugins-config.plugins")
-require("debug.init")
-
+--require("debug.init")
 
 -- 透明背景
 vim.cmd [[
@@ -12,11 +10,6 @@ vim.cmd [[
     hi foldcolumn guibg=none
     hi endofbuffer guibg=none
 ]]
-
-
-
-
-
 
 
 

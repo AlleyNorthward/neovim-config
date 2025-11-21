@@ -61,11 +61,6 @@ wo.cursorline = true
 -- 右侧参考线, 超过表示代码太长了, 考虑换行
 wo.colorcolumn = "80"
 
--- 换行调整
-o.wrap = true
--- o.linebreak = true
--- o.breakindent = true
-o.showbreak = "↳"
 -- 不可见字符的显示, 这里只把空格显示为一个点
 o.list = true
 o.listchars = "space:."
@@ -112,6 +107,12 @@ o.whichwrap = '<,>'
 
 -- 永远显示 tabline
 o.showtabline = 2
+
+-- 换行调整
+o.wrap = true
+-- o.linebreak = true
+-- o.breakindent = true
+o.showbreak = "↳"
 
 -- 使用增强状态栏插件后不再需要vim的模式提示
 -- vim.o.showmode = false
